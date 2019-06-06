@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image } from 'react-native';
+import { Ionicons, AntDesign, Feather, Entypo, SimpleLineIcons, FontAwesome } from '@expo/vector-icons';
 
 ///////////////LOGIN SCREEN////////////////////////
 class LoginScreen extends React.Component {
@@ -51,37 +52,25 @@ class ChoiceScreen extends React.Component {
 //employer home screen
 class EmployHomeScreen extends React.Component{
   static navigationOptions = {
-    title: 'Emplyr.',
+    header: null,
   };
   render(){
     const {navigate} = this.props.navigation;
     return (
-      <View style={styles.container}>
-        <Text>Employ Screen</Text>
-        <TouchableOpacity style={styles.hollowBtn}
-        onPress = {() => this.props.navigation.navigate('CreateJob')}>
-          <Text>create job</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.hollowBtn}
-        onPress = {() => this.props.navigation.navigate('CurrentAds')}>
-          <Text>current ads</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.hollowBtn}
-        onPress = {() => this.props.navigation.navigate('Candidates')}>
-          <Text>candidates</Text>
-        </TouchableOpacity>
-         <TouchableOpacity style={styles.hollowBtn}
-         onPress = {() => this.props.navigation.navigate('PendingJobs')}>
-          <Text>pending jobs</Text>
-        </TouchableOpacity>
-         <TouchableOpacity style={styles.hollowBtn}
-         onPress = {() => this.props.navigation.navigate('eCompletedJobs')}>
-          <Text>completed jobs</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.hollowBtn}
-        onPress = {() => this.props.navigation.navigate('eSettings')}>
-          <Text>settings</Text>
-        </TouchableOpacity>
+      <View style={styles.profileContainer}>
+
+        <AntDesign name="pluscircleo" size={40} color="#5595fc" onPress = {()=> this.props.navigation.navigate('CreateJob')} />
+        
+        <FontAwesome name="newspaper-o" size={40} color="#5595fc" onPress = {()=> this.props.navigation.navigate('CurrentAds')} />
+      
+        <Feather name="users" size={40} color="#5595fc" onPress = {()=> this.props.navigation.navigate('Candidates')} />
+
+        <AntDesign name="clockcircleo" size={40} color="#5595fc" onPress = {() => this.props.navigation.navigate('PendingJobs')}/>
+         
+        <AntDesign name="checkcircleo" size={40} color="#5595fc" onPress = {() => this.props.navigation.navigate('eCompletedJobs')}/>
+      
+        <AntDesign name="setting" size={44} color="#5595fc" onPress = {() => this.props.navigation.navigate('eSettings')}/>
+      
       </View>
     ); 
   }
@@ -178,37 +167,27 @@ class EmploySettings extends React.Component{
 ///////////////WORKER SECTION////////////////////
 class WorkHomeScreen extends React.Component{
   static navigationOptions = {
-    title: 'Emplyr.',
+    header: null,
   };
   render(){
     const {navigate} = this.props.navigation;
     return (
-      <View style={styles.container}>
-        <Image
-          style={{width: 150, height: 150, borderRadius: 100}}
-          source={{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}}
-        />
-        <Text>Work Screen</Text>
-        <TouchableOpacity style={styles.hollowBtn}
-        onPress = {() => this.props.navigation.navigate('EditProfile')}>
-          <Text>edit profile</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.hollowBtn}
-        onPress = {() => this.props.navigation.navigate('JobSearch')}>
-          <Text>job search</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.hollowBtn}
-        onPress = {() => this.props.navigation.navigate('AppliedJobs')}>
-          <Text>Applied jobs</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.hollowBtn}
-        onPress = {() => this.props.navigation.navigate('wCompletedJobs')}>
-          <Text>completed jobs</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.hollowBtn}
-        onPress = {() => this.props.navigation.navigate('wSettings')}>
-          <Text>settings</Text>
-        </TouchableOpacity> 
+      <View style={styles.profileContainer}>
+
+        <AntDesign name="user" size={40} color="#5595fc" onPress = {()=> this.props.navigation.navigate('wProfile')} />
+         
+        <Feather name="edit-2" size={40} color="#5595fc" onPress = {()=> this.props.navigation.navigate('EditProfile')} />
+        
+        <AntDesign name="search1" size={40} color="#5595fc" onPress = {() => this.props.navigation.navigate('JobSearch')}/>
+      
+        <SimpleLineIcons name="bag" size={40} color="#5595fc" onPress = {() => this.props.navigation.navigate('AppliedJobs')} />
+
+        <AntDesign name="checkcircleo" size={40} color="#5595fc" onPress = {() => this.props.navigation.navigate('wCompletedJobs')}/>
+
+        <AntDesign name="clockcircleo" size={40} color="#5595fc" onPress = {() => this.props.navigation.navigate('wPendingJobs')}/>
+
+        <AntDesign name="setting" size={44} color="#5595fc" onPress = {() => this.props.navigation.navigate('wSettings')}/>
+      
       </View>
     ); 
   }
@@ -285,6 +264,34 @@ class WorkSettings extends React.Component{
   }
 }
 
+class WorkProfile extends React.Component{
+  static navigationOptions = {
+    title: 'Emplyr.',
+  };
+  render(){
+    const {navigate} = this.props.navigation;
+    return (
+      <View style={styles.container}>
+        <Text>profile</Text>
+      </View>
+    );
+  }
+}
+
+class WorkPendingJobs extends React.Component{
+  static navigationOptions = {
+    title: 'Emplyr.',
+  };
+  render(){
+    const {navigate} = this.props.navigation;
+    return (
+      <View style={styles.container}>
+        <Text>pending jobs</Text>
+      </View>
+    );
+  }
+}
+
 ////////////////NAVIGATION////////////////////
 const MainNavigator = createStackNavigator({
   Login: {screen: LoginScreen},
@@ -304,6 +311,8 @@ const MainNavigator = createStackNavigator({
   AppliedJobs: {screen: WorkAppliedJobs},
   wCompletedJobs: {screen: WorkCompletedJobs},
   wSettings: {screen: WorkSettings},
+  wProfile: {screen: WorkProfile},
+  wPendingJobs: {screen: WorkPendingJobs}
 }, {
   initialRouteName: "Login",
 }
@@ -320,6 +329,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+
+  profileContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+
   },
 
   formInput: {
