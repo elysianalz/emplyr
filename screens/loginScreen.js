@@ -11,7 +11,7 @@ export default class LoginScreen extends React.Component {
     return (
       <View style={styles.homeScreen}>
         <Text style={styles.homeTitle}>Emplyr.</Text>
-        <TouchableOpacity style = {styles.facebookLoginBtn} onPress = {()=> this.props.navigation.navigate('Choice')}>
+        <TouchableOpacity style = {styles.facebookLoginBtn} onPress = {()=> this.props.navigation.navigate('Home')}>
           <AntDesign name="facebook-square" size={40} color="white" />
           <Text style={styles.whiteText}>Login with Facebook</Text>
         </TouchableOpacity>
