@@ -22,8 +22,6 @@ export default class WorkHomeScreen extends React.Component{
             </View>
             <View style={styles.menuItems}>
             <AntDesign name="user" size={40} color="white" onPress = {()=> this.props.navigation.navigate('wProfile')} />
-             
-            <Feather name="edit-2" size={40} color="white" onPress = {()=> this.props.navigation.navigate('EditProfile')} />
             
             <AntDesign name="search1" size={40} color="white" onPress = {() => this.props.navigation.navigate('JobSearch')}/>
           
