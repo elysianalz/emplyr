@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet, Slider} from 'react-native';
+
 
 export default class WorkSettings extends React.Component{
   static navigationOptions = {
@@ -9,7 +10,17 @@ export default class WorkSettings extends React.Component{
     const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Text>settings</Text>
+        <View>
+         {/* <Slider
+          minimumValue={1}
+          maximumValue={50}
+          minimumTrackTintColor="#1EB1FC"
+          maximumTractTintColor="#1EB1FC"
+          step={1}
+          value={1}
+          thumbTintColor="#1EB1FC"
+        />*/}
+        </View>
       </View>
     );
   }
@@ -19,7 +30,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });

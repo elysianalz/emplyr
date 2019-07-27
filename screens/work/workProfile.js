@@ -1,11 +1,33 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image} from 'react-native';
+import { View, Text, StyleSheet, Image, AsyncStorage} from 'react-native';
+import { StorageHelper } from '../../StorageHelper';
 import { Feather } from '@expo/vector-icons';
 
 export default class WorkProfile extends React.Component{
+  
   static navigationOptions = {
     title: 'Profile',
   };
+
+  constructor(props){
+    super(props)
+    this.state = {
+      user: this.get('user'),
+    }
+  }
+
+  async _sh(key){
+    return await AsyncStorage.getItem(key);
+  }
+
+  get(key) {
+    let shItem = this._sh(key).then((item) => {
+      this.setState({
+        user: item,
+      });
+    });
+  }
+
   render(){
     const {navigate} = this.props.navigation;
     return (
@@ -19,6 +41,9 @@ export default class WorkProfile extends React.Component{
                   onPress = {()=> this.props.navigation.navigate('EditProfile')} />
         </View>
         <Text style={styles.textContainer}>
+          {this.state.user ? this.state.user : null}
+        </Text>
+        <Text style={styles.textContainer}>
           sample text lorem ipsum dolamit fucky lucky rubber ducky
           sample text lorem ipsum dolamit fucky lucky rubber ducky
           sample text lorem ipsum dolamit fucky lucky rubber ducky
@@ -26,6 +51,7 @@ export default class WorkProfile extends React.Component{
       </View>
     );
   }
+
 }
 
 const styles = StyleSheet.create({

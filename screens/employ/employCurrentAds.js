@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default class EmployCurrentAds extends React.Component{
   static navigationOptions = {
@@ -9,17 +9,41 @@ export default class EmployCurrentAds extends React.Component{
     const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Text>current ads</Text>
+        <TouchableOpacity style={styles.job} className="job">
+          <Text className={styles.text}>Job Title</Text>
+          <Text>15 minutes ago</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.job} className="job">
+          <Text className={styles.text}>Job Title</Text>
+          <Text>15 minutes ago</Text>
+        </TouchableOpacity>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-   container: {
+    container: {
     flex: 1,
+    flexDirection: 'column',
     backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 5,
+    paddingTop: 10,
+  },
+
+  job: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderWidth: 2,
+    borderColor: "black",
+    padding: 10,
+    paddingTop: 30,
+    paddingBottom: 30,
+    marginTop: 10,
+  },
+
+  text: {
+    fontSize: 24,
   },
 });
