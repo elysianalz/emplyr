@@ -20,19 +20,22 @@ export default class LoginScreen extends React.Component {
     AsyncStorage.setItem(key, value);
   };
 
-  createUser(id, name, picture){
-    fetch('http://localhost/api/profile', {
+  createUser(id, name){
+    fetch('http://192.168.0.16:3000/api/profile', {
       method: 'POST',
       headers: {
-        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         id: id,
         name: name,
-        picture: picture,
       }),
-    });
+    })
+    .then(res => res.json())
+
+    .then(response => console.log('Success:', JSON.stringify(response)))
+
+    .catch(error => console.log('Error:', error));
   }
 
   async logIn() {
@@ -57,6 +60,7 @@ export default class LoginScreen extends React.Component {
         .then((responseJson) => {
           this.store('user', responseJson.name);
           this.store('id', responseJson.id);
+          this.createUser(responseJson.id, responseJson.name);
           this.props.navigation.navigate('Home');
         })
 
