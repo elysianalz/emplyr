@@ -58,7 +58,7 @@ export default class LoginScreen extends React.Component {
         .then((response) => response.json())
 
         .then((responseJson) => {
-          this.store('user', responseJson.name);
+          /*this.store('user', responseJson.name);*/
           this.store('id', responseJson.id);
           this.createUser(responseJson.id, responseJson.name);
           this.props.navigation.navigate('Home');

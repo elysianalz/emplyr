@@ -12,7 +12,7 @@ export default class WorkProfile extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      user: this.get('user'),
+      user: this.get('id'),
     }
   }
 
@@ -21,11 +21,27 @@ export default class WorkProfile extends React.Component{
   }
 
   get(key) {
-    let shItem = this._sh(key).then((item) => {
+    let shItem = this._sh(key).then(item => {
+      this.getUserInformation(item);
+    })
+    .catch(error => console.error(error));
+  }
+
+  getUserInformation(id){
+
+  
+    fetch('http://192.168.0.16:3000/api/profile?id='+id)
+
+    .then((response) => response.json())
+
+    .then((responseJson) => {
       this.setState({
-        user: item,
+        user: responseJson,
       });
-    });
+    })
+
+    .catch(error => console.error(error));
+
   }
 
   render(){
@@ -41,12 +57,10 @@ export default class WorkProfile extends React.Component{
                   onPress = {()=> this.props.navigation.navigate('EditProfile')} />
         </View>
         <Text style={styles.textContainer}>
-          {this.state.user ? this.state.user : null}
+         {this.state.user ? this.state.user.name : null}
         </Text>
         <Text style={styles.textContainer}>
-          sample text lorem ipsum dolamit fucky lucky rubber ducky
-          sample text lorem ipsum dolamit fucky lucky rubber ducky
-          sample text lorem ipsum dolamit fucky lucky rubber ducky
+          {this.state.user ? this.state.user.description : "edit your profile to add a description"}
         </Text>
       </View>
     );
