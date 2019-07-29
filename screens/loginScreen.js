@@ -20,7 +20,7 @@ export default class LoginScreen extends React.Component {
     AsyncStorage.setItem(key, value);
   };
 
-  createUser(id, name){
+  createUser(id, name, picture){
     fetch('http://192.168.0.16:3000/api/profile', {
       method: 'POST',
       headers: {
@@ -29,6 +29,7 @@ export default class LoginScreen extends React.Component {
       body: JSON.stringify({
         id: id,
         name: name,
+        picture: picture,
       }),
     })
     .then(res => res.json())
@@ -53,14 +54,17 @@ export default class LoginScreen extends React.Component {
 
       if (type === 'success') {
        
-        fetch(`https://graph.facebook.com/me?access_token=${token}`)
+        fetch(`https://graph.facebook.com/me?access_token=${token}&fields=picture.type(large),id,name`)
 
         .then((response) => response.json())
 
         .then((responseJson) => {
           /*this.store('user', responseJson.name);*/
           this.store('id', responseJson.id);
-          this.createUser(responseJson.id, responseJson.name);
+          this.createUser(responseJson.id, responseJson.name, JSON.stringify(responseJson.picture));
+          console.log("NAME: "+responseJson.name);
+          console.log("PICTURE: "+responseJson.picture);
+          console.log("object: ", JSON.stringify(responseJson));
           this.props.navigation.navigate('Home');
         })
 

@@ -46,10 +46,18 @@ export default class WorkProfile extends React.Component{
 
   render(){
     const {navigate} = this.props.navigation;
+    let picture = "";
+    {this.state.user ? picture = JSON.parse(this.state.user.picture) : null}
+    console.log(picture);
     return (
       <View style={styles.container}>
-        <Image style={{width: '100%', height: '50%'}} 
-              source={{uri: 'https://images.unsplash.com/photo-1508673778687-0b1ffaac41c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'}}/>
+        {this.state.user ? 
+          <Image 
+            style={{width: '100%', height: '50%'}} 
+            source={{uri: picture.data.url}}
+          />
+        :null}
+        
         <View style={styles.button}>
           <Feather name="edit-2" 
                   size={45} 

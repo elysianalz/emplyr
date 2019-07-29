@@ -27,7 +27,6 @@ export default class WorkEditProfile extends React.Component{
 
   getUserInformation(id){
 
-  
     fetch('http://192.168.0.16:3000/api/profile?id='+id)
 
     .then((response) => response.json())
