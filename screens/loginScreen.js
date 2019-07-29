@@ -35,7 +35,7 @@ export default class LoginScreen extends React.Component {
   }
 
   // retrieve user information based on .get key
-  getUserInformation(id){
+  getUserInformation(id, bool){
 
     fetch('http://192.168.0.16:3000/api/profile?id='+id)
 
@@ -98,8 +98,19 @@ export default class LoginScreen extends React.Component {
 
         .then((responseJson) => {
           this.store('id', responseJson.id);
-          this.createUser(responseJson.id, responseJson.name, JSON.stringify(responseJson.picture));
+
+          // search if user exist befor user creation
+          fetch('http://192.168.0.16:3000/api/profile?id='+responseJson.id)
+          .then((res) => res.json())
+          .then((resJson) => {
+            resJson ? null : 
+            this.createUser(responseJson.id, responseJson.name, JSON.stringify(responseJson.picture));
+          })
+          .catch(error => console.error(error));
+
+          // navigate to home page
           this.props.navigation.navigate('Home');
+
         })
 
         .catch((error) => {
