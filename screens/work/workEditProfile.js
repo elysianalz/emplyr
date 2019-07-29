@@ -56,7 +56,10 @@ export default class WorkEditProfile extends React.Component{
 
     .then(res => res.json())
 
-    .then(response => console.log('Success:', JSON.stringify(response)))
+    .then(response => {
+      console.log('Success:', JSON.stringify(response))
+      this.props.navigation.navigate('wProfile');
+    })
 
     .catch(error => console.log('Error!:', error));
 
